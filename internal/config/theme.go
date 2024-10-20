@@ -6,6 +6,7 @@ type (
 	Theme struct {
 		Border        bool   `toml:"border"`
 		BorderColor   string `toml:"border_color"`
+		FocusBorderColor string `toml:"focus_border_color"`
 		BorderPadding [4]int `toml:"border_padding"`
 
 		TitleColor      string `toml:"title_color"`
@@ -39,6 +40,7 @@ func defaultTheme() Theme {
 	return Theme{
 		Border:        true,
 		BorderColor:   "default",
+		FocusBorderColor: "default",
 		BorderPadding: [...]int{0, 0, 1, 1},
 
 		BackgroundColor: "default",
