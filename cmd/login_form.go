@@ -33,6 +33,8 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 	lf.SetLabelColor(tcell.GetColor("#CDD6F4"))
 	lf.SetCheckboxBackgroundColor(tcell.GetColor("#181825"))
 	lf.SetCheckboxTextColor(tcell.GetColor("#F38BA8"))
+	lf.SetButtonBackgroundColor(tcell.ColorBlue)
+	lf.SetButtonTextColor(tcell.GetColor("#181825"))
 
 	lf.NewInput("Email", "", false)
 	lf.NewInput("Password", "", true)
@@ -41,9 +43,6 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 
 
 	lf.AddButton("Login", lf.login)
-
-	lf.SetButtonBackgroundColor(tcell.ColorBlue)
-	lf.SetButtonTextColor(tcell.GetColor("#1E1E2E"))
 
 	lf.SetTitle("Login")
 	lf.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
