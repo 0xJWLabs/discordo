@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/atotto/clipboard"
 	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/0xJWLabs/discordo/internal/markdown"
+	"github.com/atotto/clipboard"
 	"github.com/diamondburned/arikawa/v3/discord"
 	"github.com/diamondburned/ningen/v3/discordmd"
 	"github.com/gdamore/tcell/v2"
@@ -140,8 +140,22 @@ func (mt *MessagesText) createHeader(w io.Writer, m discord.Message, isReply boo
 	clientID := discordState.Ready().User.ID
 
 	if mt.cfg.Timestamps {
-		time := m.Timestamp.Time().In(time.Local).Format(mt.cfg.TimestampsFormat)
-		fmt.Fprintf(w, "[::d]%s[::-] ", time)
+		// Get the local time from the message's timestamp
+		msgTime := m.Timestamp.Time().In(time.Local)
+
+		// Format the timestamp based on whether it's today or not
+		var timeString string
+		now := time.Now()
+
+		// Check if the timestamp is from today
+		if msgTime.Year() == now.Year() && msgTime.YearDay() == now.YearDay() {
+			timeString = fmt.Sprintf("Today at %s", msgTime.Format(time.Kitchen))
+		} else {
+			timeString = msgTime.Format("January 2, 2006 3:04 PM")
+		}
+
+		// Print the formatted time
+		fmt.Fprintf(w, "[::d]%s[::-] ", timeString)
 	}
 
 	if isReply {
