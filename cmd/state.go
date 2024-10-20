@@ -13,7 +13,7 @@ import (
 	"github.com/diamondburned/arikawa/v3/utils/httputil/httpdriver"
 	"github.com/diamondburned/ningen/v3"
 	"github.com/gdamore/tcell/v2"
-	"github.com/rivo/tview"
+	"github.com/0xJWLabs/tview"
 )
 
 const userAgent = config.Name + "/0.1 (https://github.com/diamondburned/arikawa, v3)"

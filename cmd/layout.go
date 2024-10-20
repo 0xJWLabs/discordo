@@ -5,7 +5,7 @@ import (
 
 	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/gdamore/tcell/v2"
-	"github.com/rivo/tview"
+	"github.com/0xJWLabs/tview"
 	"github.com/zalando/go-keyring"
 )
 
@@ -88,7 +88,7 @@ func (l *Layout) onAppInputCapture(event *tcell.EventKey) *tcell.EventKey {
 	case l.cfg.Keys.Quit:
 		l.app.Stop()
 	case "Ctrl+C":
-		// https://github.com/rivo/tview/blob/a64fc48d7654432f71922c8b908280cdb525805c/application.go#L153
+		// https://github.com/0xJWLabs/tview/blob/a64fc48d7654432f71922c8b908280cdb525805c/application.go#L153
 		return tcell.NewEventKey(tcell.KeyCtrlC, 0, tcell.ModNone)
 	}
 

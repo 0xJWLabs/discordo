@@ -1,6 +1,6 @@
 package config
 
-import "github.com/rivo/tview"
+import "github.com/0xJWLabs/tview"
 
 type (
 	Theme struct {

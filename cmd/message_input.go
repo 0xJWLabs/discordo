@@ -12,7 +12,7 @@ import (
 	"github.com/diamondburned/arikawa/v3/discord"
 	"github.com/diamondburned/arikawa/v3/utils/json/option"
 	"github.com/gdamore/tcell/v2"
-	"github.com/rivo/tview"
+	"github.com/0xJWLabs/tview"
 )
 
 const tmpFilePattern = config.Name + "_*.md"

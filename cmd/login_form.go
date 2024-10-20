@@ -6,7 +6,7 @@ import (
 	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/diamondburned/arikawa/v3/api"
 	"github.com/gdamore/tcell/v2"
-	"github.com/rivo/tview"
+	"github.com/0xJWLabs/tview"
 	"github.com/zalando/go-keyring"
 )
 
@@ -31,11 +31,14 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 	lf.SetFieldTextColor(tcell.GetColor("#CDD6F4"))
 	lf.SetFieldBackgroundColor(tcell.GetColor("#181825"))
 	lf.SetLabelColor(tcell.GetColor("#CDD6F4"))
+	lf.SetCheckboxBackgroundColor(tcell.GetColor("#181825"))
+	lf.SetCheckboxTextColor(tcell.GetColor("#F38BA8"))
 
 	lf.NewInput("Email", "", false)
 	lf.NewInput("Password", "", true)
 	lf.NewInput("Code (optional)", "", true)
 	lf.NewCheckbox("Remember Me", false)
+
 
 	lf.AddButton("Login", lf.login)
 
