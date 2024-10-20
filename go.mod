@@ -3,7 +3,7 @@ module github.com/0xJWLabs/discordo
 go 1.23.2
 
 require (
-	github.com/0xJWLabs/tview v0.0.0-20241020210350-8a28cab8f232
+	github.com/0xJWLabs/tview v0.0.0-20241020213603-638ebbabb1c0
 	github.com/BurntSushi/toml v1.4.0
 	github.com/atotto/clipboard v0.1.4
 	github.com/diamondburned/arikawa/v3 v3.4.0

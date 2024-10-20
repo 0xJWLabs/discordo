@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Remove the discordo directory
+echo "Removing discordo directory..."
+rm -rf discordo
+
+# Build the Go project
+echo "Building the project..."
+go build .
+
+# Remove the existing discordo binary
+echo "Removing existing discordo binary..."
+rm -rf ~/.local/bin/discordo
+
+# Copy the newly built binary to ~/.local/bin/
+echo "Copying the new discordo binary..."
+cp -riv ./discordo ~/.local/bin/
+
+echo "Build and deployment completed!"
