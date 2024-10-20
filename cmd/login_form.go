@@ -27,21 +27,17 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 		done: done,
 	}
 
-	lf.AddInputField("Email", "", 0, nil, nil)
-	lf.AddPasswordField("Password", "", 0, 0, nil)
-	lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
-	lf.AddCheckbox("Remember Me", false, nil)
-	lf.AddButton("Login", lf.login)
+	lf.AddInputField("Email", "", 0, nil, nil).AddPasswordField("Password", "", 0, 0, nil).AddPasswordField("Code (optional)", "", 0, 0, nil).AddCheckbox("Remember Me", false, nil).AddButton("Login", lf.login)
 
-	emailInput := lf.GetFormItemByLabel("Email")
-	passwordInput := lf.GetFormItemByLabel("Password")
-	codeInput := lf.GetFormItemByLabel("Code (optional)")
-	checkbox := lf.GetFormItemByLabel("Remember Me")
+	emailInput := lf.GetFormItem(0).(*tview.InputField)
+	passwordInput := lf.GetFormItem(1).(*tview.InputField)
+	codeInput := lf.GetFormItem(2).(*tview.InputField)
+	checkbox := lf.GetFormItem(3).(*tview.Checkbox)
 
-	emailInput.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#CDD6F4"), tcell.GetColor("#181825"))
-	passwordInput.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#CDD6F4"), tcell.GetColor("#181825"))
-	codeInput.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#CDD6F4"), tcell.GetColor("#181825"))
-	checkbox.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#F38BA8"), tcell.GetColor("#181825"))
+	emailInput.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#CDD6F4"))
+	passwordInput.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#CDD6F4"))
+	codeInput.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#CDD6F4"))
+	checkbox.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#F38BA8"))
 
 	lf.SetButtonBackgroundColor(tcell.GetColor("#89B4FA"))
 	lf.SetButtonTextColor(tcell.GetColor("#1E1E2E"))
