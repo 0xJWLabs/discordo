@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/ayn2op/discordo/internal/config"
-	"github.com/ayn2op/discordo/internal/logger"
+	"github.com/0xJWLabs/discordo/internal/config"
+	"github.com/0xJWLabs/discordo/internal/logger"
 )
 
 var (

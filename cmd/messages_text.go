@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/atotto/clipboard"
-	"github.com/ayn2op/discordo/internal/config"
-	"github.com/ayn2op/discordo/internal/markdown"
+	"github.com/0xJWLabs/discordo/internal/config"
+	"github.com/0xJWLabs/discordo/internal/markdown"
 	"github.com/diamondburned/arikawa/v3/discord"
 	"github.com/diamondburned/ningen/v3/discordmd"
 	"github.com/gdamore/tcell/v2"
@@ -25,6 +25,13 @@ type MessagesText struct {
 	cfg               *config.Config
 	app               *tview.Application
 	selectedMessageID discord.MessageID
+}
+
+func ternary(cond bool, a, b string) string {
+	if cond {
+		return a
+	}
+	return b
 }
 
 func newMessagesText(app *tview.Application, cfg *config.Config) *MessagesText {
@@ -130,6 +137,8 @@ func (mt *MessagesText) createMessage(m discord.Message) {
 }
 
 func (mt *MessagesText) createHeader(w io.Writer, m discord.Message, isReply bool) {
+	clientID := discordState.Ready().User.ID
+
 	if mt.cfg.Timestamps {
 		time := m.Timestamp.Time().In(time.Local).Format(mt.cfg.TimestampsFormat)
 		fmt.Fprintf(w, "[::d]%s[::-] ", time)
@@ -139,7 +148,9 @@ func (mt *MessagesText) createHeader(w io.Writer, m discord.Message, isReply boo
 		fmt.Fprintf(mt, "[::d]%s", mt.cfg.Theme.MessagesText.ReplyIndicator)
 	}
 
-	fmt.Fprintf(w, "[%s]%s[-:-:-] ", mt.cfg.Theme.MessagesText.AuthorColor, m.Author.Username)
+	color := ternary(m.Author.ID != clientID, mt.cfg.Theme.MessagesText.AuthorColor, mt.cfg.Theme.MessagesText.UserColor)
+
+	fmt.Fprintf(w, "[%s]%s[-:-:-] ", color, m.Author.Username)
 }
 
 func (mt *MessagesText) createBody(w io.Writer, m discord.Message, isReply bool) {

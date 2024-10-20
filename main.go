@@ -4,8 +4,8 @@ import (
 	"flag"
 	"log/slog"
 
-	"github.com/ayn2op/discordo/cmd"
-	"github.com/ayn2op/discordo/internal/config"
+	"github.com/0xJWLabs/discordo/cmd"
+	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/zalando/go-keyring"
 )
 

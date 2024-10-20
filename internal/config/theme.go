@@ -26,6 +26,7 @@ type (
 	MessagesTextTheme struct {
 		ReplyIndicator string `toml:"reply_indicator"`
 
+		UserColor				string `toml:"user_color"`
 		AuthorColor     string `toml:"author_color"`
 		ContentColor    string `toml:"content_color"`
 		EmojiColor      string `toml:"emoji_color"`
@@ -54,6 +55,7 @@ func defaultTheme() Theme {
 			ReplyIndicator: string(tview.BoxDrawingsLightArcDownAndRight) + " ",
 
 			AuthorColor:     "aqua",
+			UserColor:			 "red",
 			ContentColor:    tview.Styles.PrimaryTextColor.String(),
 			EmojiColor:      "green",
 			LinkColor:       "blue",

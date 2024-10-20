@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/atotto/clipboard"
-	"github.com/ayn2op/discordo/internal/config"
+	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/diamondburned/arikawa/v3/api"
 	"github.com/diamondburned/arikawa/v3/discord"
 	"github.com/diamondburned/arikawa/v3/utils/json/option"
