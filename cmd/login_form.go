@@ -27,23 +27,24 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 		done: done,
 	}
 
-	emailInput := lf.AddInputField("Email", "", 0, nil, nil)
-	passwordInput := lf.AddPasswordField("Password", "", 0, 0, nil)
-	codeInput := lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
-	checkbox := lf.AddCheckbox("Remember Me", false, nil)
-	loginButton := lf.AddButton("Login", lf.login)
+	lf.AddInputField("Email", "", 0, nil, nil)
+	lf.AddPasswordField("Password", "", 0, 0, nil)
+	lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
+	lf.AddCheckbox("Remember Me", false, nil)
+	lf.AddButton("Login", lf.login)
 
-	emailInput.SetFieldBackgroundColor(tcell.GetColor("#181825"))
-	passwordInput.SetFieldBackgroundColor(tcell.GetColor("#181825"))
-	codeInput.SetFieldBackgroundColor(tcell.GetColor("#181825"))
-	checkbox.SetFieldBackgroundColor(tcell.GetColor("#1E1E2E"))
-	loginButton.SetButtonBackgroundColor(tcell.GetColor("#89B4FA"))
+	emailInput := lf.GetFormItemByLabel("Email")
+	passwordInput := lf.GetFormItemByLabel("Password")
+	codeInput := lf.GetFormItemByLabel("Code (optional)")
+	checkbox := lf.GetFormItemByLabel("Remember Me")
 
-	emailInput.SetFieldTextColor(tcell.GetColor("#CDD6F4"))
-	passwordInput.SetFieldTextColor(tcell.GetColor("#CDD6F4"))
-	codeInput.SetFieldTextColor(tcell.GetColor("#CDD6F4"))
-	checkbox.SetFieldTextColor(tcell.GetColor("#F38BA8"))
-	loginButton.SetButtonTextColor(tcell.GetColor("#1E1E2E"))
+	emailInput.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#CDD6F4"), tcell.GetColor("#181825"))
+	passwordInput.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#CDD6F4"), tcell.GetColor("#181825"))
+	codeInput.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#CDD6F4"), tcell.GetColor("#181825"))
+	checkbox.SetFormAttributes(20, tcell.GetColor("#CDD6F4"), tcell.GetColor("#1E1E2E"), tcell.GetColor("#F38BA8"), tcell.GetColor("#181825"))
+
+	lf.SetButtonBackgroundColor(tcell.GetColor("#89B4FA"))
+	lf.SetButtonTextColor(tcell.GetColor("#1E1E2E"))
 
 	lf.SetTitle("Login")
 	lf.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
