@@ -52,8 +52,6 @@ func (l *Layout) show(token string) error {
 			}
 		}, l.cfg)
 		l.app.SetRoot(loginForm, true)
-		l.app.SetFocus(loginForm)
-		loginForm.updateColor()
 	} else {
 		if err := openState(token, l.app, l.cfg); err != nil {
 			return err

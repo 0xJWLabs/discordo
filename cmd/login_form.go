@@ -28,13 +28,19 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 		done: done,
 	}
 
-	lf.AddInputField("Email", "", 0, nil, nil)
-	lf.AddPasswordField("Password", "", 0, 0, nil)
-	lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
+	lf.NewInput("Email", "", "#CDD6F4", "#181825", false)
+	lf.NewInput("Password", "", "#CDD6F4", "#181825", true)
+	lf.NewInput("Code (optional)", "", "#CDD6F4", "#181825", true)
+
+	// lf.AddInputField("Email", "", 0, nil, nil)
+	// lf.AddPasswordField("Password", "", 0, 0, nil)
+	// lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
 	lf.AddCheckbox("Remember Me", false, nil)
 	lf.AddButton("Login", lf.login)
 
-	lf.SetButtonBackgroundColor(tcell.ColorGreen)
+	lf.SetFieldBackgroundColor(tcell.GetColor("#181825"))
+	lf.SetFieldTextColor(tcell.GetColor("#CDD6F4"))
+	lf.SetButtonBackgroundColor(tcell.ColorBlue)
 
 	lf.SetTitle("Login")
 	lf.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
@@ -48,6 +54,23 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 	lf.updateColor()
 
 	return lf
+}
+
+func (lf *loginForm) NewInput(label string, defaultValue string, textColor string, backgroundColor string, password bool) {
+	inputField := tview.NewInputField().
+		SetLabel(label).
+		SetText("").
+		SetFieldWidth(0).
+		SetAcceptanceFunc(nil).
+		SetChangedFunc(nil).
+		SetFieldTextColor(tcell.GetColor(textColor)).
+		SetFieldBackgroundColor(tcell.GetColor(backgroundColor))
+
+	if password {
+		inputField.SetMaskCharacter('*')
+	}
+
+	lf.AddFormItem(inputField)
 }
 
 func (lf *loginForm) updateColor() {
