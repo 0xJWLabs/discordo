@@ -42,6 +42,7 @@ func newGuildsTree(app *tview.Application, cfg *config.Config) *GuildsTree {
 	p := cfg.Theme.BorderPadding
 	gt.SetBorder(cfg.Theme.Border)
 	gt.SetBorderColor(tcell.GetColor(cfg.Theme.BorderColor))
+	gt.SetFocusBorderColor(tcell.GetColor(cfg.Theme.FocusBorderColor))
 	gt.SetBorderPadding(p[0], p[1], p[2], p[3])
 
 	gt.SetInputCapture(gt.onInputCapture)

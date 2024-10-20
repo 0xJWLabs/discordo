@@ -51,6 +51,7 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 	p := cfg.Theme.BorderPadding
 	lf.SetBorder(cfg.Theme.Border)
 	lf.SetBorderColor(tcell.GetColor(cfg.Theme.BorderColor))
+	lf.SetFocusBorderColor(tcell.GetColor(cfg.Theme.FocusBorderColor))
 	lf.SetBorderPadding(p[0], p[1], p[2], p[3])
 
 	return lf

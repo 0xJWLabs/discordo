@@ -48,6 +48,7 @@ func newMessageInput(app *tview.Application, cfg *config.Config) *MessageInput {
 	p := cfg.Theme.BorderPadding
 	mi.SetBorder(cfg.Theme.Border)
 	mi.SetBorderColor(tcell.GetColor(cfg.Theme.BorderColor))
+	mi.SetFocusBorderColor(tcell.GetColor(cfg.Theme.FocusBorderColor))
 	mi.SetBorderPadding(p[0], p[1], p[2], p[3])
 
 	return mi

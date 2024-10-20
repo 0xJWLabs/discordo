@@ -60,6 +60,7 @@ func newMessagesText(app *tview.Application, cfg *config.Config) *MessagesText {
 	p := mt.cfg.Theme.BorderPadding
 	mt.SetBorder(mt.cfg.Theme.Border)
 	mt.SetBorderColor(tcell.GetColor(mt.cfg.Theme.BorderColor))
+	mt.SetFocusBorderColor(tcell.GetColor(mt.cfg.Theme.FocusBorderColor))
 	mt.SetBorderPadding(p[0], p[1], p[2], p[3])
 
 	markdown.DefaultRenderer.AddOptions(
