@@ -27,11 +27,29 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 		done: done,
 	}
 
-	lf.AddInputField("Email", "", 0, nil, nil)
-	lf.AddPasswordField("Password", "", 0, 0, nil)
-	lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
-	lf.AddCheckbox("Remember Me", true, nil)
-	lf.AddButton("Login", lf.login)
+	inputBackgroundColor := tcell.GetColor("#181825")
+	buttonBackgroundColor := tcell.GetColor("#89B4FA")
+	inputTextColor := tcell.GetColor("#CDD6F4")
+	checkboxTextColor := tcell.GetColor("#F38BA8")
+	buttonTextColor := tcell.GetColor("#1E1E2E")
+
+	emailInput := lf.AddInputField("Email", "", 0, nil, nil)
+	passwordInput := lf.AddPasswordField("Password", "", 0, 0, nil)
+	codeInput := lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
+	checkbox := lf.AddCheckbox("Remember Me", true, nil)
+	loginButton := lf.AddButton("Login", lf.login)
+
+	emailInput.SetFieldBackgroundColor(inputBackgroundColor)
+	passwordInput.SetFieldBackgroundColor(inputBackgroundColor)
+	codeInput.SetFieldBackgroundColor(inputBackgroundColor)
+	checkbox.SetFieldBackgroundColor(inputBackgroundColor)
+	loginButton.SetButtonBackgroundColor(buttonBackgroundColor)
+
+	emailInput.SetFieldTextColor(inputTextColor)
+	passwordInput.SetFieldTextColor(inputTextColor)
+	codeInput.SetFieldTextColor(inputTextColor)
+	checkbox.SetFieldTextColor(checkboxTextColor)
+	loginButton.SetButtonTextColor(buttonTextColor)
 
 	lf.SetTitle("Login")
 	lf.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
