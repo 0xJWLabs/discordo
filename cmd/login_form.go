@@ -5,6 +5,7 @@ import (
 
 	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/diamondburned/arikawa/v3/api"
+	"log/slog"
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 	"github.com/zalando/go-keyring"
@@ -27,19 +28,12 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 		done: done,
 	}
 
-	lf.AddInputField("Email", "", 0, nil, nil).AddPasswordField("Password", "", 0, 0, nil).AddPasswordField("Code (optional)", "", 0, 0, nil).AddCheckbox("Remember Me", false, nil).AddButton("Login", lf.login)
+	lf.AddInputField("Email", "", 0, nil, nil)
+	lf.AddPasswordField("Password", "", 0, 0, nil)
+	lf.AddPasswordField("Code (optional)", "", 0, 0, nil)
+	lf.AddCheckbox("Remember Me", false, nil)
+	lf.AddButton("Login", lf.login)
 
-	emailInput := lf.GetFormItem(0).(*tview.InputField)
-	passwordInput := lf.GetFormItem(1).(*tview.InputField)
-	codeInput := lf.GetFormItem(2).(*tview.InputField)
-	checkbox := lf.GetFormItem(3).(*tview.Checkbox)
-
-	emailInput.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#CDD6F4"))
-	passwordInput.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#CDD6F4"))
-	codeInput.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#CDD6F4"))
-	checkbox.SetFieldBackgroundColor(tcell.GetColor("#181825")).SetFieldTextColor(tcell.GetColor("#F38BA8"))
-
-	lf.SetButtonBackgroundColor(tcell.GetColor("#89B4FA"))
 	lf.SetButtonTextColor(tcell.GetColor("#1E1E2E"))
 
 	lf.SetTitle("Login")
@@ -51,7 +45,37 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 	lf.SetBorderColor(tcell.GetColor(cfg.Theme.BorderColor))
 	lf.SetBorderPadding(p[0], p[1], p[2], p[3])
 
+	lf.updateColor()
+
 	return lf
+}
+
+func (lf *loginForm) updateColor() {
+	emailInput := lf.GetFormItem(0).(*tview.InputField)
+	passwordInput := lf.GetFormItem(1).(*tview.InputField)
+	codeInput := lf.GetFormItem(2).(*tview.InputField)
+	checkbox := lf.GetFormItem(3).(*tview.Checkbox)
+
+	if emailInput == nil {
+		slog.Error("Email Input Doesn't Exist")
+	}
+
+	if passwordInput == nil {
+		slog.Error("Password Input Doesn't Exist")
+	}
+
+	backgroundColor := tcell.GetColor("#181825")
+	textColor := tcell.GetColor("#cdd6f4")
+	checkboxColor := tcell.GetColor("#f38ba8")
+
+	emailInput.SetFieldBackgroundColor(backgroundColor)
+	emailInput.SetFieldTextColor(textColor)
+	passwordInput.SetFieldBackgroundColor(backgroundColor)
+	passwordInput.SetFieldTextColor(textColor)
+	codeInput.SetFieldBackgroundColor(backgroundColor)
+	codeInput.SetFieldTextColor(textColor)
+	checkbox.SetFieldBackgroundColor(backgroundColor)
+	checkbox.SetFieldTextColor(checkboxColor)
 }
 
 func (lf *loginForm) login() {
