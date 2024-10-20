@@ -34,7 +34,7 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 	lf.AddCheckbox("Remember Me", false, nil)
 	lf.AddButton("Login", lf.login)
 
-	lf.SetButtonTextColor(tcell.GetColor("#1E1E2E"))
+	lf.SetButtonBackgroundColor(tcell.ColorGreen)
 
 	lf.SetTitle("Login")
 	lf.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
@@ -56,30 +56,32 @@ func (lf *loginForm) updateColor() {
 	codeInput := lf.GetFormItem(2).(*tview.InputField)
 	checkbox := lf.GetFormItem(3).(*tview.Checkbox)
 
-	if emailInput == nil {
-		slog.Error("Email Input Doesn't Exist")
-	} else {
-		slog.Info("Email Input exist")
+	// Log checks for the form items
+	backgroundColor := tcell.ColorBlack
+	textColor := tcell.ColorWhite
+	checkboxColor := tcell.ColorRed
+
+	// Check if form items exist before updating
+	if emailInput != nil {
+		slog.Info("Email Input: exist")
+		emailInput.SetFieldBackgroundColor(backgroundColor)
+		emailInput.SetFieldTextColor(textColor)
 	}
-
-	if passwordInput == nil {
-		slog.Error("Password Input Doesn't Exist")
-	} else {
-		slog.Info("Password Input exist")
+	if passwordInput != nil {
+		slog.Info("Password: exist")
+		passwordInput.SetFieldBackgroundColor(backgroundColor)
+		passwordInput.SetFieldTextColor(textColor)
 	}
-
-	backgroundColor := tcell.GetColor("#181825")
-	textColor := tcell.GetColor("#cdd6f4")
-	checkboxColor := tcell.GetColor("#f38ba8")
-
-	emailInput.SetFieldBackgroundColor(backgroundColor)
-	emailInput.SetFieldTextColor(textColor)
-	passwordInput.SetFieldBackgroundColor(backgroundColor)
-	passwordInput.SetFieldTextColor(textColor)
-	codeInput.SetFieldBackgroundColor(backgroundColor)
-	codeInput.SetFieldTextColor(textColor)
-	checkbox.SetFieldBackgroundColor(backgroundColor)
-	checkbox.SetFieldTextColor(checkboxColor)
+	if codeInput != nil {
+		slog.Info("Code Input: exist")
+		codeInput.SetFieldBackgroundColor(backgroundColor)
+		codeInput.SetFieldTextColor(textColor)
+	}
+	if checkbox != nil {
+		slog.Info("Checkbox: exist")
+		checkbox.SetFieldBackgroundColor(backgroundColor)
+		checkbox.SetFieldTextColor(checkboxColor)
+	}
 }
 
 func (lf *loginForm) login() {
