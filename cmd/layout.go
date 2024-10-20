@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"strings"
 	"log/slog"
 
 	"github.com/0xJWLabs/discordo/internal/config"
@@ -96,42 +95,18 @@ func (l *Layout) onAppInputCapture(event *tcell.EventKey) *tcell.EventKey {
 	return event
 }
 
-func (l *Layout) isKeyMatch(event *tcell.EventKey, keyString string) bool {
-	parts := strings.Split(keyString, "+")
-	modifiers := tcell.ModNone
-	keyRune := event.Rune()
-
-	// Check for modifiers
-	for _, part := range parts {
-		switch part {
-		case "Ctrl":
-			modifiers |= tcell.ModCtrl
-		case "Shift":
-			modifiers |= tcell.ModShift
-		case "Alt":
-			modifiers |= tcell.ModAlt
-		default:
-			if keyRune != 0 && string(keyRune) == part {
-				return event.Modifiers() == modifiers
-			}
-		}
-	}
-
-	return false
-}
-
 func (l *Layout) onFlexInputCapture(event *tcell.EventKey) *tcell.EventKey {
-	switch {
-	case l.isKeyMatch(event, l.cfg.Keys.FocusGuildsTree):
+	switch event.Name() {
+	case l.cfg.Keys.FocusGuildsTree:
 		l.app.SetFocus(l.guildsTree)
 		return nil
-	case l.isKeyMatch(event, l.cfg.Keys.FocusMessagesText):
+	case l.cfg.Keys.FocusMessagesText:
 		l.app.SetFocus(l.messagesText)
 		return nil
-	case l.isKeyMatch(event, l.cfg.Keys.FocusMessageInput):
+	case l.cfg.Keys.FocusMessageInput:
 		l.app.SetFocus(l.messageInput)
 		return nil
-	case l.isKeyMatch(event, l.cfg.Keys.Logout):
+	case l.cfg.Keys.Logout:
 		l.app.Stop()
 
 		if err := keyring.Delete(config.Name, "token"); err != nil {
@@ -140,7 +115,7 @@ func (l *Layout) onFlexInputCapture(event *tcell.EventKey) *tcell.EventKey {
 		}
 
 		return nil
-	case l.isKeyMatch(event, l.cfg.Keys.ToggleGuildsTree):
+	case l.cfg.Keys.ToggleGuildsTree:
 		// The guilds tree is visible if the numbers of items is two.
 		if l.flex.GetItemCount() == 2 {
 			l.flex.RemoveItem(l.guildsTree)
@@ -155,41 +130,6 @@ func (l *Layout) onFlexInputCapture(event *tcell.EventKey) *tcell.EventKey {
 
 		return nil
 	}
-
-	// switch event.Name() {
-	// case l.cfg.Keys.FocusGuildsTree:
-	// 	l.app.SetFocus(l.guildsTree)
-	// 	return nil
-	// case l.cfg.Keys.FocusMessagesText:
-	// 	l.app.SetFocus(l.messagesText)
-	// 	return nil
-	// case l.cfg.Keys.FocusMessageInput:
-	// 	l.app.SetFocus(l.messageInput)
-	// 	return nil
-	// case l.cfg.Keys.Logout:
-	// 	l.app.Stop()
-	//
-	// 	if err := keyring.Delete(config.Name, "token"); err != nil {
-	// 		slog.Error("failed to delete token from keyring", "err", err)
-	// 		return nil
-	// 	}
-	//
-	// 	return nil
-	// case l.cfg.Keys.ToggleGuildsTree:
-	// 	// The guilds tree is visible if the numbers of items is two.
-	// 	if l.flex.GetItemCount() == 2 {
-	// 		l.flex.RemoveItem(l.guildsTree)
-	//
-	// 		if l.guildsTree.HasFocus() {
-	// 			l.app.SetFocus(l.flex)
-	// 		}
-	// 	} else {
-	// 		l.init()
-	// 		l.app.SetFocus(l.guildsTree)
-	// 	}
-	//
-	// 	return nil
-	// }
 
 	return event
 }
