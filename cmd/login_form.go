@@ -58,10 +58,14 @@ func (lf *loginForm) updateColor() {
 
 	if emailInput == nil {
 		slog.Error("Email Input Doesn't Exist")
+	} else {
+		slog.Info("Email Input exist")
 	}
 
 	if passwordInput == nil {
 		slog.Error("Password Input Doesn't Exist")
+	} else {
+		slog.Info("Password Input exist")
 	}
 
 	backgroundColor := tcell.GetColor("#181825")
