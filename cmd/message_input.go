@@ -44,6 +44,7 @@ func newMessageInput(app *tview.Application, cfg *config.Config) *MessageInput {
 
 	mi.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
 	mi.SetTitleAlign(tview.AlignLeft)
+	mi.SetTitlePadding(1, 1)
 
 	p := cfg.Theme.BorderPadding
 	mi.SetBorder(cfg.Theme.Border)
@@ -57,6 +58,7 @@ func newMessageInput(app *tview.Application, cfg *config.Config) *MessageInput {
 func (mi *MessageInput) reset() {
 	mi.replyMessageID = 0
 	mi.SetTitle("")
+	mi.SetTitlePadding(0, 0)
 	mi.SetText("", true)
 }
 

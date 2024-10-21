@@ -56,6 +56,7 @@ func newMessagesText(app *tview.Application, cfg *config.Config) *MessagesText {
 	mt.SetTitle("Messages")
 	mt.SetTitleColor(tcell.GetColor(mt.cfg.Theme.TitleColor))
 	mt.SetTitleAlign(tview.AlignLeft)
+	mt.SetTitlePadding(1, 1)
 
 	p := mt.cfg.Theme.BorderPadding
 	mt.SetBorder(mt.cfg.Theme.Border)
@@ -89,6 +90,7 @@ func (mt *MessagesText) reset() {
 	layout.messagesText.selectedMessageID = 0
 
 	mt.SetTitle("")
+	mt.SetTitlePadding(1, 1)
 	mt.Clear()
 	mt.Highlight()
 }
@@ -378,6 +380,7 @@ func (mt *MessagesText) reply(mention bool) {
 
 	title += msg.Author.Tag()
 	layout.messageInput.SetTitle(title)
+	layout.messageInput.SetTitlePadding(1, 1)
 	layout.messageInput.replyMessageID = mt.selectedMessageID
 	mt.app.SetFocus(layout.messageInput)
 }
