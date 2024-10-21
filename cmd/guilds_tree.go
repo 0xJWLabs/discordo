@@ -86,12 +86,12 @@ func (gt *GuildsTree) channelToString(c discord.Channel) string {
 	var s string
 	switch c.Type {
 	case discord.GuildText:
-		s = "#" + c.Name
+		s = "# " + c.Name
 	case discord.DirectMessage:
 		r := c.DMRecipients[0]
 		s = r.Tag()
 	case discord.GuildVoice:
-		s = "v-" + c.Name
+		s = " " + c.Name
 	case discord.GroupDM:
 		s = c.Name
 		// If the name of the channel is empty, use the recipients' tags
@@ -104,11 +104,11 @@ func (gt *GuildsTree) channelToString(c discord.Channel) string {
 			s = strings.Join(recipients, ", ")
 		}
 	case discord.GuildAnnouncement:
-		s = "a-" + c.Name
+		s = " " + c.Name
 	case discord.GuildStore:
-		s = "s-" + c.Name
+		s = "󱃁 " + c.Name
 	case discord.GuildForum:
-		s = "f-" + c.Name
+		s = "󰠢 " + c.Name
 	default:
 		s = c.Name
 	}
