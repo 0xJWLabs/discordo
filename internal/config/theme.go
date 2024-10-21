@@ -10,6 +10,7 @@ type (
 		BorderPadding [4]int `toml:"border_padding"`
 
 		TitleColor      string `toml:"title_color"`
+		FocusTitleColor	string `toml:"focus_title_color"`
 		BackgroundColor string `toml:"background_color"`
 
 		GuildsTree   GuildsTreeTheme   `toml:"guilds_tree"`
@@ -45,6 +46,7 @@ func defaultTheme() Theme {
 
 		BackgroundColor: "default",
 		TitleColor:      "default",
+		FocusTitleColor: "default",
 
 		GuildsTree: GuildsTreeTheme{
 			AutoExpandFolders:   true,
