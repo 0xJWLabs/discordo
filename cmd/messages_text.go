@@ -11,11 +11,11 @@ import (
 
 	"github.com/0xJWLabs/discordo/internal/config"
 	"github.com/0xJWLabs/discordo/internal/markdown"
+	"github.com/0xJWLabs/tview"
 	"github.com/atotto/clipboard"
 	"github.com/diamondburned/arikawa/v3/discord"
 	"github.com/diamondburned/ningen/v3/discordmd"
 	"github.com/gdamore/tcell/v2"
-	"github.com/0xJWLabs/tview"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/yuin/goldmark/renderer"
 )
@@ -146,13 +146,17 @@ func (mt *MessagesText) createHeader(w io.Writer, m discord.Message, isReply boo
 
 		// Format the timestamp based on whether it's today or not
 		var timeString string
-		now := time.Now()
-
+		
 		// Check if the timestamp is from today
-		if msgTime.Year() == now.Year() && msgTime.YearDay() == now.YearDay() {
-			timeString = fmt.Sprintf("Today at %s", msgTime.Format(time.Kitchen))
+		if mt.cfg.TimestampsFormat == "relative" {
+			now := time.Now()
+			if msgTime.Year() == now.Year() && msgTime.YearDay() == now.YearDay() {
+				timeString = fmt.Sprintf("Today at %s", msgTime.Format(time.Kitchen))
+			} else {
+				timeString = msgTime.Format("January 2, 2006 3:04 PM")
+			}
 		} else {
-			timeString = msgTime.Format("January 2, 2006 3:04 PM")
+			timeString = msgTime.Format(mt.cfg.TimestampsFormat)
 		}
 
 		// Print the formatted time
