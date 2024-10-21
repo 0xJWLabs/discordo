@@ -55,6 +55,7 @@ func newMessagesText(app *tview.Application, cfg *config.Config) *MessagesText {
 
 	mt.SetTitle("Messages")
 	mt.SetTitleColor(tcell.GetColor(mt.cfg.Theme.TitleColor))
+	mt.SetFocusTitleColor(tcell.GetColor(mt.cfg.Theme.FocusTitleColor))
 	mt.SetTitleAlign(tview.AlignLeft)
 	mt.SetTitlePadding(1, 1)
 

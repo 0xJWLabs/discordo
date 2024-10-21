@@ -46,6 +46,7 @@ func newLoginForm(done doneFn, cfg *config.Config) *loginForm {
 
 	lf.SetTitle("Login")
 	lf.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
+	lf.SetFocusTitleColor(tcell.GetColor(cfg.Theme.FocusTitleColor))
 	lf.SetTitleAlign(tview.AlignLeft)
 	lf.SetTitlePadding(1, 1)
 

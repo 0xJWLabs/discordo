@@ -37,6 +37,7 @@ func newGuildsTree(app *tview.Application, cfg *config.Config) *GuildsTree {
 
 	gt.SetTitle("Guilds")
 	gt.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
+	gt.SetFocusTitleColor(tcell.GetColor(cfg.Theme.FocusTitleColor))
 	gt.SetTitleAlign(tview.AlignLeft)
 	gt.SetTitlePadding(1, 1)
 

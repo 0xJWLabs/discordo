@@ -43,6 +43,7 @@ func newMessageInput(app *tview.Application, cfg *config.Config) *MessageInput {
 	mi.SetBackgroundColor(tcell.GetColor(cfg.Theme.BackgroundColor))
 
 	mi.SetTitleColor(tcell.GetColor(cfg.Theme.TitleColor))
+	mi.SetFocusTitleColor(tcell.GetColor(cfg.Theme.FocusTitleColor))
 	mi.SetTitleAlign(tview.AlignLeft)
 	mi.SetTitlePadding(1, 1)
 
